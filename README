@@ -1,0 +1,32 @@
+Stanca Adelin-Nicolae
+331CAa
+
+Pentru rezolvarea temei, am incercat sa imbin rezolvarea pentru bonus cu
+rezolvarea standard, astfel nu am folosit calea de comunicatie intre 0 si 1.
+Pentru reprezentarea topologiei, am creat un hashtable care va contine pentru
+fiecare proces coordonator o lista cu clusterul sau aferent. Mai intai, pentru
+fiecare coordonator parcurg fisierele aferente si completez graful cu datele pe
+care le am din fisiere, dupa care, pentru rank-ul 2, trimit clusterul catre 0
+si 1 si astept sa primesc clusterele 0 si 1 pentru a completa graful. Apoi, fac
+conexiunea dintre celelalte 2 noduri, iar cu informatiile deja primite completez
+grafurile workerilor aferenti. Pentru rank-ul 1, primesc datele aferente si le
+prelucrez catre workerii sai, lucru similar realizat si la rank-ul 0. Pentru
+workeri, acestia primesc indiferent de clusterul lor elementele in ordinea 0,1,2
+de la coordonatori si completeaza graful.
+Pentru urmatorul task, calculez numarul de elemente ce revin fiecarui worker,
+apoi repartizez fiecarui coordonator un vector cu elemente din vectorul initial
+pe care il trimit de la coordonatorul 0 la coordonatorul 2, urmand ca dupa sa
+fie ori procesat la clusterul 2, ori sa fie trimis la 1. De asemenea, la nivelul
+lui 0, fac repartizarea vectorului ramas dupa workeri, dupa care astept sa se
+finalizeze rezultatul partial oferit de workeri, pe care il concatenez cu cel de
+la celelalte 2 procese coordonator si il printez. La rank-ul 2, primesc vectorul
+lui 1 si il trimit mai departe, dupa care il primesc si doar il redirectionez la
+1, dupa care incep similar procesarea subvectorului curent pe care la final il
+trimit catre 0. Procesul 1 procedeaza similar, primeste de la 2 vectorul pe care
+il secventiaza si il trimite workerilor sai, construieste vectorul final pe care
+il trimite din nou spre 2. Workerii isi primesc vectorul, ii dubleaza valorile si
+il trimit iar spre coordonatorul sau. Am implementat o functie care returneaza
+clusterul din care un worker face parte.
+
+Feedback: tema destul de usoara, mult cod repetat, as fi putut modulariza, insa
+timpul nu mi-a permis.
